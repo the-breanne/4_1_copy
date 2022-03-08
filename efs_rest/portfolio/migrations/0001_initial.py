@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Customer',
+            name='Task',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Stock',
+            name='Meeting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('symbol', models.CharField(max_length=10)),
@@ -38,11 +38,11 @@ class Migration(migrations.Migration):
                 ('shares', models.DecimalField(decimal_places=1, max_digits=10)),
                 ('purchase_price', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('purchase_date', models.DateField(blank=True, default=django.utils.timezone.now, null=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='stocks', to='portfolio.Customer')),
+                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='meetings', to='portfolio.Task')),
             ],
         ),
         migrations.CreateModel(
-            name='Investment',
+            name='Feedback',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('category', models.CharField(max_length=50)),
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('acquired_date', models.DateField(default=django.utils.timezone.now)),
                 ('recent_value', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('recent_date', models.DateField(blank=True, default=django.utils.timezone.now, null=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='investments', to='portfolio.Customer')),
+                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='feedbacks', to='portfolio.Task')),
             ],
         ),
     ]

@@ -9,13 +9,13 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('auth/', obtain_jwt_token),
-    path('', views.customer_list),
-    url(r'^api/customers/$', views.customer_list),
-    url(r'^api/customers/(?P<pk>[0-9]+)$', views.getCustomer),
-    path('investments/', views.investment_list),
-    url(r'^api/investments/$', views.investment_list),
-    url(r'^api/investments/(?P<pk>[0-9]+)$', views.getInvestment),
-    path('stocks/', views.stock_list),
-    url(r'^api/stocks/$', views.stock_list),
-    url(r'^api/stocks/(?P<pk>[0-9]+)$', views.getStock)
+    path('', views.task_list),
+    url(r'^api/tasks/$', views.task_list),
+    url(r'^api/tasks/(?P<pk>[0-9]+)$', views.getTask),
+    path('feedbacks/', views.feedback_list),
+    url(r'^api/feedbacks/$', views.feedback_list),
+    url(r'^api/feedbacks/(?P<pk>[0-9]+)$', views.getFeedback),
+    path('meetings/', views.meeting_list),
+    url(r'^api/meetings/$', views.meeting_list),
+    url(r'^api/meetings/(?P<pk>[0-9]+)$', views.getMeeting)
 ]

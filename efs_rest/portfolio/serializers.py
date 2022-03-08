@@ -9,14 +9,14 @@ class TaskSerializer(serializers.ModelSerializer):
 
             fields = ('pk', 'task_number', 'task_name', 'task_description', 'task_priority')
 
-class InvestmentSerializer(serializers.ModelSerializer):
+class FeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
             model = Feedback
             fields = ('pk', 'task', 'fb_description', 'fb_from')
 
 
-class StockSerializer(serializers.ModelSerializer):
+class MeetingSerializer(serializers.ModelSerializer):
 
     class Meta:
             model = Meeting
