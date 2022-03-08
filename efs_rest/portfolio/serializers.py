@@ -1,23 +1,23 @@
 from rest_framework import serializers
-from .models import Customer, Investment, Stock
+from .models import Task, Feedback, Meeting
 
 
-class CustomerSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
-            model = Customer
+            model = Task
 
-            fields = ('pk','name', 'address','cust_number', 'city', 'state', 'zipcode', 'email', 'cell_phone')
+            fields = ('pk', 'task_number', 'task_name', 'task_description', 'task_priority')
 
 class InvestmentSerializer(serializers.ModelSerializer):
 
     class Meta:
-            model = Investment
-            fields = ('pk','customer', 'cust_number', 'category', 'description', 'acquired_value', 'acquired_date', 'recent_value', 'recent_date')
+            model = Feedback
+            fields = ('pk', 'task', 'fb_description', 'fb_from')
 
 
 class StockSerializer(serializers.ModelSerializer):
 
     class Meta:
-            model = Stock
-            fields = ('pk','customer', 'cust_number', 'symbol', 'name', 'shares', 'purchase_price', 'purchase_date')
+            model = Meeting
+            fields = ('pk', 'task','mtg_with', 'mtg_date', 'mtg_description')

@@ -2,15 +2,12 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
-class Customer(models.Model):
-    name = models.CharField(max_length=50)
-    address = models.CharField(max_length=200)
-    cust_number = models.IntegerField(blank=False, null=False)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    zipcode = models.CharField(max_length=10)
-    email = models.EmailField(max_length=200)
-    cell_phone = models.CharField(max_length=50)
+class Task(models.Model):
+    task_number = models.CharField(max_length=50)
+    task_name = models.CharField(max_length=50)
+    task_description = models.CharField(max_length=250)
+    task_priority = models.CharField(max_length=50)
+
     created_date = models.DateTimeField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
@@ -24,17 +21,14 @@ class Customer(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.cust_number)
+        return str(self.task_number)
 
 
-class Investment(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='investments')
-    category = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
-    acquired_value = models.DecimalField(max_digits=10, decimal_places=2)
-    acquired_date = models.DateField(default=timezone.now)
-    recent_value = models.DecimalField(max_digits=10, decimal_places=2)
-    recent_date = models.DateField(default=timezone.now, blank=True, null=True)
+class Feedback(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='feedback')
+    fb_description = models.CharField(max_length=200)
+    fb_from = models.CharField(max_length=200)
+
 
     def created(self):
         self.acquired_date = timezone.now()
@@ -45,35 +39,27 @@ class Investment(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.customer)
-
-    def results_by_investment(self):
-        return self.recent_value - self.acquired_value
-
-    def cust_number(self):
-        return self.customer.cust_number
+        return str(self.task)
 
 
 
-class Stock(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='stocks')
-    symbol = models.CharField(max_length=10)
-    name = models.CharField(max_length=50)
-    shares = models.DecimalField (max_digits=10, decimal_places=1)
-    purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
-    purchase_date = models.DateField(default=timezone.now, blank=True, null=True)
+
+
+class Meeting(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='feedback')
+    mtg_with = models.CharField(max_length=50)
+    mtg_date = models.DateField(default=timezone.now, blank=True, null=True)
+    mtg_description = models.CharField(max_length=200)
+   
 
     def created(self):
         self.recent_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return str(self.customer)
-
-    def initial_stock_value(self):
-        return self.shares * self.purchase_price
+        return str(self.task)
 
 
     def cust_number(self):
-        return self.customer.cust_number
+        return self.task.task_number
 
