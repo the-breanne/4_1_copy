@@ -28,17 +28,20 @@ class Feedback(models.Model):
     fb_description = models.CharField(max_length=200)
     fb_from = models.CharField(max_length=200)
 
+    created_date = models.DateTimeField(
+        default=timezone.now)
+    updated_date = models.DateTimeField(auto_now_add=True)
 
     def created(self):
-        self.acquired_date = timezone.now()
+        self.created_date = timezone.now()
         self.save()
 
     def updated(self):
-        self.recent_date = timezone.now()
+        self.updated_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return str(self.fb_description)
+        return str(self.fb_from)
 
 
 
@@ -49,13 +52,20 @@ class Meeting(models.Model):
     mtg_date = models.DateField(default=timezone.now, blank=True, null=True)
     mtg_description = models.CharField(max_length=200)
    
+    created_date = models.DateTimeField(
+        default=timezone.now)
+    updated_date = models.DateTimeField(auto_now_add=True)
 
     def created(self):
-        self.recent_date = timezone.now()
+        self.created_date = timezone.now()
+        self.save()
+
+    def updated(self):
+        self.updated_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return str(self.mtg_description)
+        return str(self.mtg_with)
 
 
 
