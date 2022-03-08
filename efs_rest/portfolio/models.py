@@ -25,7 +25,6 @@ class Task(models.Model):
 
 
 class Feedback(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='feedback')
     fb_description = models.CharField(max_length=200)
     fb_from = models.CharField(max_length=200)
 
@@ -39,14 +38,13 @@ class Feedback(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.task)
+        return str(self.fb_description)
 
 
 
 
 
 class Meeting(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='feedback')
     mtg_with = models.CharField(max_length=50)
     mtg_date = models.DateField(default=timezone.now, blank=True, null=True)
     mtg_description = models.CharField(max_length=200)
@@ -57,9 +55,7 @@ class Meeting(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.task)
+        return str(self.mtg_description)
 
 
-    def cust_number(self):
-        return self.task.task_number
 

@@ -9,17 +9,13 @@ class TaskList(admin.ModelAdmin):
 
 
 class FeedbackList(admin.ModelAdmin):
-    list_display = ('task', 'fb_description', 'fb_from')
-    list_filter = ('task', 'fb_from')
-    search_fields = ('task', 'fb_from')
-    ordering = ['task']
+    list_display = ('fb_description', 'fb_from')
+
 
 
 class MeetingList(admin.ModelAdmin):
-    list_display = ('task','mtg_with', 'mtg_date', 'mtg_description')
-    list_filter = ('task')
-    search_fields = ('task')
-    ordering = ['task']
+    list_display = ('mtg_with', 'mtg_date', 'mtg_description')
+
 
 
 admin.site.register(Task, TaskList)

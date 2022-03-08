@@ -13,11 +13,11 @@ class FeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
             model = Feedback
-            fields = ('pk', 'task', 'fb_description', 'fb_from')
+            fields = ('pk', 'fb_description', 'fb_from')
 
 
 class MeetingSerializer(serializers.ModelSerializer):
 
     class Meta:
             model = Meeting
-            fields = ('pk', 'task','mtg_with', 'mtg_date', 'mtg_description')
+            fields = ('pk', 'mtg_with', 'mtg_date', 'mtg_description')
